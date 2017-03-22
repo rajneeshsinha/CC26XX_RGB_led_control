@@ -43,7 +43,6 @@
 /*********************************************************************
  * INCLUDES
  */
-#include <stdio.h>
 #include <ti/drivers/Power.h>
 #include <ti/drivers/power/PowerCC26XX.h>
 #include <ti/sysbios/knl/Clock.h>
@@ -61,11 +60,11 @@
  */
 
 //-------------- Task configuration --------------------
-#define ble_TASK_PRIORITY                     1
-#define ble_TASK_STACK_SIZE                   512
+#define led_TASK_PRIORITY                     1
+#define led_TASK_STACK_SIZE                   512
 
-Task_Struct bleTask;
-Char bleTaskStack[ble_TASK_STACK_SIZE];
+Task_Struct ledTask;
+Char ledTaskStack[led_TASK_STACK_SIZE];
 
 /* -----------------------------------------------------------------------------
 *                           Constants and macros
@@ -162,7 +161,7 @@ void led_close(void)
   
   
 /*********************************************************************
- * @fn      MainApp_taskFxn_taskFxn
+ * @fn      led_taskFxn
  *
  * @brief   Application task entry point for the Main Application.
  *
@@ -170,7 +169,7 @@ void led_close(void)
  *
  * @return  None.
  */
-static void ble_taskFxn(UArg a0, UArg a1)
+static void led_taskFxn(UArg a0, UArg a1)
 {    
   uint8_t i = 0;   
     
@@ -207,9 +206,9 @@ void RGB_control_createTask(void)
 
   // Configure task
   Task_Params_init(&taskParams);
-  taskParams.stack = bleTaskStack;
-  taskParams.stackSize = ble_TASK_STACK_SIZE;
-  taskParams.priority = ble_TASK_PRIORITY;
+  taskParams.stack = ledTaskStack;
+  taskParams.stackSize = led_TASK_STACK_SIZE;
+  taskParams.priority = led_TASK_PRIORITY;
 
-  Task_construct(&bleTask, ble_taskFxn, &taskParams, NULL);
+  Task_construct(&ledTask, led_taskFxn, &taskParams, NULL);
 }

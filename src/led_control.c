@@ -3,8 +3,7 @@
  @file : led_control.c
 
  @brief : Control RGB led intensity by using PWM
-
- Group: WCS, BTS
+ 
  Target Device: CC2650, CC2640
 
 ******************************************************************************
